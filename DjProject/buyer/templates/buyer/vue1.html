@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学习vue使用</title>
+    <script src="/static/buyer/js/jquery.min.js"></script>
+    <script src="/static/buyer/js/vue.min.js"></script>
+</head>
+<body>
+<h1>vue使用</h1>
+
+{#告诉jango不要解析verbatim里的内容#}
+{# v-bind: 绑定属性用于显示原内容不用加大括号 #}
+{% verbatim %}
+<div id='app'>
+
+    {{ msg }}
+    <a v-bind:href="url">百度</a>
+    <!--判断 v-if-->
+    <p v-if="flag">
+        啊啊
+    </p>
+    <!--循环 v-for-->
+    <ul>
+        <li v-for="game in gameList">{{ game }}</li>
+    </ul>
+    <button v-on:click="test">按钮</button>
+</div>
+{% endverbatim %}
+</body>
+<script>
+    $(function () {
+        new Vue({
+            el:'#app', //element 用于绑定页面的范围
+            data:{ // 用于接收数据
+                msg: 'hello vue',
+                url: 'http://www.baidu.com',
+                flag:true,
+                gameList: ['LOL','CF','DNF','CS'],
+
+            },
+            // 绑定事件
+            methods:{ //编写绑定事件的函数
+                test:function () {
+                    alert("我是弹框");
+                },
+
+            },
+            // 创建方法
+            created: function () { //vue执行完成后执行的函数
+                alert('创建完成了')
+            }
+        })
+    })
+
+</script>
+</html>
