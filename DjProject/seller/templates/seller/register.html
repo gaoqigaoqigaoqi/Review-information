@@ -41,9 +41,9 @@
                             <div class="form-group row">
                                 <div class="col-sm-11 mb-3 mb-sm-0">
                                     <input type="text" class="form-control form-control-user" name="username"
-                                           id="exampleFirstName" placeholder="用户名"
-                                           value="{{ sellerform.username.value|default:'' }}"/>
-                                    <span style="color: red">{{ sellerform.username.errors.0 }}</span>
+                                           id="exampleFirstName" placeholder="用户名"/>
+{#                                           value="{{ sellerform.username.value|default:''}}"/>#}
+                                    <span style="color: red">{{ sellerform.username.errors.0}}</span>
                                 </div>
                             </div>
 
@@ -59,8 +59,8 @@
                             <div class="form-group row">
                                 <div class="col-sm-11 mb-3 mb-sm-0">
                                     <input type="email" class="form-control form-control-user" name="email"
-                                           id="exampleInputEmail" placeholder="邮件"
-                                           value="{{ sellerform.email.value|default:'' }}">
+                                           id="exampleInputEmail" placeholder="邮件"/>
+{#                                           value="{{ sellerform.email.value|default:'' }}"/>#}
                                     <span style="color: red">{{ sellerform.email.errors.0 }}</span>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
 
                                 <div class="col-sm-11">
                                     <input type="text" class="form-control form-control-user" name="phone"
-                                           id="phone" placeholder="电话" value="{{ sellerform.phone.value|default:'' }}">
+                                           id="phone" placeholder="电话" value="">
                                     <span style="color: red">{{ sellerform.phone.errors.0 }}</span>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
                             <div class="form-group row">
                                 <div class="col-sm-11">
                                     <input type="text" class="form-control form-control-user" name="address"
-                                           id="address" value="{{ sellerform.address.value|default:'' }}"
+                                           id="address" value=""
                                            placeholder="用户地址">
                                     <span style="color: red">{{ sellerform.address.errors.0 }}</span>
                                 </div>
@@ -91,7 +91,6 @@
                                     <input type="radio" name="gender" id="man" value="True" checked>男
                                     <input type="radio" name="gender" id="feman" value="False">女
                                 </label>
-
                             </div>
                             
                             <div class="form-group">
