@@ -53,3 +53,6 @@ class Login(APIView):
 class Index(APIView):
     def get(self,request):
         return render(request,'seller/index.html')
+
+def vue(request):
+    return render(request,'seller/vuetest.html')
