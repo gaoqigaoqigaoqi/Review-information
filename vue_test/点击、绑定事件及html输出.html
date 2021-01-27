@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue1</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <span v-once>{{msg}}</span>
+    <button v-on:click="reverseMessage">点击反转消息</button>
+<!--    <span v-bind:title="msg1">鼠标悬停查看</span>-->
+    <input type="text" v-model="msg">
+<!--    <p v-if="see">现在你看到我了</p>-->
+    <ol>
+<!--        <todo-item v-for="t in todos"-->
+<!--        v-bind:todo="t"-->
+<!--        v-bind:key="t.id"-->
+<!--        ></todo-item>-->
+        <button-counter v-for="t in todos" v-bind:title="t.text"
+        @clicknow...="clicknow"></button-counter>
+
+    </ol>
+    <div v-bind:id="id">
+        我是绑定的id
+    </div>
+    <div v-html="rawhtml">
+
+    </div>
+    <div>
+        <span>我是三元表达式：{{sanyuan ? 'YES': 'NO'}}</span>
+    </div>
+<!--
+v-bind简写是 : 动态参数是 :[key]
+v-on简写是 @click 动态参数是 @[event]
+-->
+</div>
+
+</body>
+<script>
+    //    定义组件部分（子组件）页面实现它的是父组件
+    Vue.component('button-counter',{
+        props:['title'],
+        data: function(){
+            return {count: 0}
+        },
+        template:'<button v-on:click="clickfunc">{{title}}点击增加{{count}}</button>',
+        methods: {
+            clickfunc:function () {
+                this.count++;
+                // # emit方法去触发事件，第一个参数为方法，第二个参数为数据
+                this.$emit('clicknow',this.count)
+            }
+        }
+    })
+
+    var app = new Vue({
+        el:'#app',
+        data:{
+            msg:'hello vue',
+            msg1:'加载于'+new Date().toLocaleString(),
+            see :true,
+            todos: [
+                      {id:0, text: '学习 JavaScript' },
+                      {id:1, text: '学习 Vue' },
+                      {id:2, text: '整个牛项目' },
+                      {id:3, text: 'python' },
+                    ],
+            rawhtml:"<span style='color: red'>我是span</span>",
+            id:'test',
+            sanyuan:true,
+        },
+        methods:{
+            reverseMessage:function () {
+                this.msg = this.msg.split('').reverse().join('')
+            },
+            clicknow:function (e) {
+                console.log(e);
+            }
+        },
+
+    });
+    app.msg='hello'
+
+</script>
+<style>
+    #test{
+        color: red;
+    }
+</style>
+</html>

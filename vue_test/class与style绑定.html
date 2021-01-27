@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>class与style绑定</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+<!--    <my-component v-bind:class="[activeclass,errorclass]">Hi</my-component>-->
+    <my-component v-bind:class="[isactive ?activeclass:'',errorclass]">Hi</my-component>
+</div>
+
+</body>
+<script type="text/javascript">
+    // 组件要写在实例上面
+    Vue.component('my-component',{
+        template:'<p class="start_p">我是组件p标签</p>'
+    })
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            isactive:false,
+            activeclass:'active',
+            errorclass:'text-danger',
+
+        }
+
+    })
+
+    m= document.getElementsByTagName('p')
+    console.log(m)
+
+</script>
+</html>
