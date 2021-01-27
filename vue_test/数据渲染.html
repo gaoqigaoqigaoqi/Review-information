@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue2</title>
+     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <p>{{obj.foo}}</p>
+    <span v-once>这个值只刷新一次:{{test}}</span>
+
+  <!-- 这里的 `foo` 不会更新！ -->
+  <button @click="foo = 'baz'">Change it</button>
+</div>
+</body>
+<script>
+    // 只有当vue实例被创建时已经存在的data才是响应式
+    var data = {
+        test:'xxxxx',
+        text:'',
+        todos:[],
+        error:null,
+
+    }
+    var obj = {foo: 'aa'}
+    // obj的属性值不会被响应式改变
+    Object.freeze(
+        obj
+    )
+
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            obj:obj,
+            test:data.test
+        },
+    })
+    data.test='aaaa'
+
+
+
+</script>
+</html>

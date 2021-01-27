@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/seller/js/jquery.min.js"></script>
+    <script src="/static/seller/js/vue.min.js"></script>
+</head>
+<body>
+<div>
+    <input type="text" id="i1" >
+    <button type="submit" class="test">提取</button>
+</div>
+
+{% verbatim %}
+<div id="app">
+    {{ msg }}
+    <div>
+    <input type="text" id="i2" v-model="inp2" ref="input1">
+    <button v-on:click="tiqu">提取</button>
+    </div>
+</div>
+{% endverbatim %}
+
+</body>
+<script>
+    btn = $('.test')
+    btn.click(function () {
+        inp = $('#i1').val()
+        alert(inp)
+    })
+
+    var V = new Vue({
+    el:"#app",
+    data:{
+        msg:"hello world",
+        inp2:'',
+    },
+    methods:{
+        tiqu:function () {
+            alert(this.$refs.input1.value)
+        }
+    }
+    })
+</script>
+</html>

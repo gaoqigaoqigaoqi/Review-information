@@ -49,13 +49,13 @@
                             {% csrf_token %}
                             <div class="form-group row">
                                 <div class="col-sm-11 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" name="username"
+                                    <input type="text" v-model="username" class="form-control form-control-user" name="username"
                                            id="username" placeholder="用户名" >
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-11">
-                                    <input type="text" class="form-control form-control-user" name="password"
+                                    <input type="text" v-model="password" class="form-control form-control-user" name="password"
                                            id="password" placeholder="密码">
                                 </div>
                             </div>
@@ -95,18 +95,16 @@
 
     new Vue({
         el:"#app",
-        data:"",
+        data: {username:'',password:''},
         methods:{
             dianji:function () {
-                alert(username)
-                console.log(username,password,'xxx')
+                console.log(this.username,this.password)
                 $.ajax({
                     url:'http://127.0.0.1:8000/seller/login/',
                     type:'post',
-                    data:{"username":"zs","password":"222"},
+                    data:{"username":this.username,"password":this.password},
                     success:function (result) {
-
-                        alert("success")
+                        console.log(result)
                     }
                 })
             }

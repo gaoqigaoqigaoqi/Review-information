@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>侦听器</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="watch-example">
+    <input type="text" v-model="question">
+    <p>{{answer}}</p>
+</div>
+</body>
+<script type="text/javascript">
+var watch = new Vue({
+    el:'#watch-example',
+    data:{
+        question:'start',
+        answer:"开始的answer",
+    },
+    // 侦听器
+    watch:{
+        setInterval(handler, timeout, ...arguments) {
+            console.log('xxx')
+        },
+        question: function (newQ,oldQ) {
+            this.answer = 'question更新了'+newQ+' 原来的为  '+oldQ
+        }
+    },
+})
+</script>
+</html>

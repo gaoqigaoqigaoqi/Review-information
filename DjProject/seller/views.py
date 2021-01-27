@@ -35,16 +35,24 @@ class Login(APIView):
         password = request.POST.get("password")
         print('我是login post')
         print(username,password)
-        seller_obj = Seller.objects.get(username=username,password=password)
-        if seller_obj:
-            response = redirect('/seller/index/')
-            response.set_cookie("username", username)
-            response.set_cookie("id", seller_obj.id)
-            response.set_cookie("img",seller_obj.headimg.name)
-            return response
-        else:
-            return Response({"status":"error"})
+        try:
+            seller_obj = Seller.objects.get(username=username,password=password)
+            if seller_obj:
+                seller_data = SellerSerializer(seller_obj)
+                print(seller_data.data)
+                return Response({"status": 'ok'})
+            #     response = redirect('/seller/index/')
+            #     response.set_cookie("username", username)
+            #     response.set_cookie("id", seller_obj.id)
+            #     response.set_cookie("img",seller_obj.headimg.name)
+            #     return response
+        except Exception as e:
+            pass
+        return Response({"status":"error"})
 
 class Index(APIView):
     def get(self,request):
         return render(request,'seller/index.html')
+
+def vue(request):
+    return render(request,'seller/vuetest.html')

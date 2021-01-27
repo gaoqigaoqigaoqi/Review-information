@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.min.js"></script>
+    <script src="vue.min.js"></script>
+<!--    <script src="vue-resource.js"></script>-->
+</head>
+<body>
+
+<div id="app">
+    {{msg}}
+    <div>
+<!--        <input type="text" v-model="inp1">-->
+        <input type="text" ref="inp1">
+        <button type="submit" v-on:click="tiqu">提取</button>
+    </div>
+    {{data.info}}
+</div>
+
+</body>
+<script>
+    var V = new Vue({
+        el:'#app',
+        data:{
+            msg:"hello vue",
+            inp1:'',
+            data:function() {
+                return{
+                    info:{},
+                };
+            },
+        },
+        methods:{
+            tiqu:function () {
+                this.data.info = this.$refs.inp1.value
+                console.log(this.data.info);
+
+        }
+        }
+    })
+</script>
+</html>
