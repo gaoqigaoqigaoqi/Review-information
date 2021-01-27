@@ -31,24 +31,19 @@ class Login(APIView):
         print('我是login get')
         return render(request,'seller/login.html')
     def post(self,request):
+        print('我是login post')
         username = request.POST.get("username")
         password = request.POST.get("password")
-        print('我是login post')
-        print(username,password)
-        try:
-            seller_obj = Seller.objects.get(username=username,password=password)
-            if seller_obj:
-                seller_data = SellerSerializer(seller_obj)
-                print(seller_data.data)
-                return Response({"status": 'ok'})
-            #     response = redirect('/seller/index/')
-            #     response.set_cookie("username", username)
-            #     response.set_cookie("id", seller_obj.id)
-            #     response.set_cookie("img",seller_obj.headimg.name)
-            #     return response
-        except Exception as e:
-            pass
-        return Response({"status":"error"})
+        seller_obj = Seller.objects.get(username=username,password=password)
+        if seller_obj:
+            seller_data = SellerSerializer(seller_obj)
+            response = redirect('/seller/index/')
+            response.set_cookie("username", username)
+            response.set_cookie("id", seller_obj.id)
+            response.set_cookie("img",seller_obj.headimg.name)
+            return response
+
+
 
 class Index(APIView):
     def get(self,request):

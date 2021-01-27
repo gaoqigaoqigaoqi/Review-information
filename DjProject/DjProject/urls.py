@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-
+from seller.views import Login
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('seller/', include('seller.urls')),
     path('buyer/', include('buyer.urls')),
+    path('', Login.as_view()),
 ]
