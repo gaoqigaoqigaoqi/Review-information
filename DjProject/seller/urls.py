@@ -5,6 +5,8 @@ urlpatterns=[
     path('register/',Register.as_view()),
     path('login/',Login.as_view()),
     path('index/',Index.as_view()),
+    path('goodstype/',goodstype),
+    path('goodstype_list/',GoodsTypeList.as_view()),
     path('vuetest/',vue)
 
 ]

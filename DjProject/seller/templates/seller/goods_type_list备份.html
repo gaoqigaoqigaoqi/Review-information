@@ -23,8 +23,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                    {% verbatim %}
-                    <tr v-for="goodstype_obj in goodstype_obj_list">
+                {% for goodstype_obj in goodstype_obj_list %}
+                    <tr>
                         <td>{{ goodstype_obj.name }}</td>
                         <td>
                             <a href="/seller/edit_goodstype/?id={{ goodstype_obj.id }}"
@@ -43,7 +43,7 @@
                             </a>
                         </td>
                     </tr>
-                    {% endverbatim %}
+                {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -99,15 +99,13 @@
         var vm = new Vue({
             el:'#app',
             data:{
-                msg:'ok',
-                goodstype_obj_list:[],
+                msg:'ok'
             },
             created:function () {
                 var url='http://127.0.0.1:8000/seller/goodstype_list/'
                 this.$http.get(url).then(
                     function (result) {
-                        this.goodstype_obj_list=result['data']
-                        console.log(this.goodstype_obj_list)
+                        this.data['goodstype_obj_list']=result['data']
                     },
                     function (result) {
                         alert('error')

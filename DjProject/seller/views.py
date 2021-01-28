@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import generics
 from .models import *
 from rest_framework.views import APIView
-from .serializers import SellerSerializer
+from .serializers import *
 # Create your views here.
 from .form import SellerForm
 
@@ -17,7 +17,7 @@ class Register(APIView):
         if sellerform.is_valid():
             user = SellerSerializer(data=data)
             if user.is_valid():
-                # user.save()
+                user.save()
                 print('注册成功')
                 return redirect('/seller/login/')
             else:
@@ -44,10 +44,31 @@ class Login(APIView):
             return response
 
 
-
 class Index(APIView):
     def get(self,request):
         return render(request,'seller/index.html')
+
+
+def goodstype(request):
+
+    return render(request,'seller/goods_type_list.html')
+
+class GoodsTypeList(generics.ListAPIView):
+    serializer_class = GoodsTypeSerializer
+    def get_queryset(self):
+        goodstypes = GoodsType.objects.all()
+        return goodstypes
+
+
+    def get_serializer_context(self):
+        return {
+            'view':self
+        }
+
+class AddGoods(generics.CreateAPIView):
+    pass
+
+
 
 def vue(request):
     return render(request,'seller/vuetest.html')
