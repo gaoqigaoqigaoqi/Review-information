@@ -1,6 +1,7 @@
 from django.shortcuts import render,HttpResponse,redirect
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
-from rest_framework import generics
+from rest_framework.generics import *
 from .models import *
 from rest_framework.views import APIView
 from .serializers import *
@@ -53,21 +54,28 @@ def goodstype(request):
 
     return render(request,'seller/goods_type_list.html')
 
-class GoodsTypeList(generics.ListAPIView):
-    serializer_class = GoodsTypeSerializer
-    def get_queryset(self):
-        goodstypes = GoodsType.objects.all()
-        return goodstypes
 
+class GoodsTypeList(APIView):
+    def get(self,request):
+        goodstype_list = GoodsType.objects.all()
+        serializer_data = GoodsTypeSerializer(goodstype_list,many=True)
+        return Response(serializer_data.data)
 
-    def get_serializer_context(self):
-        return {
-            'view':self
-        }
+    def post(self,request):
+        data = request.data
 
-class AddGoods(generics.CreateAPIView):
-    pass
-
+        # name = request.POST.get('goodstype_name')
+        # img = request.FILES.get('goodstype_img')
+        # goodstype_obj = GoodsType(name=name,logo=img)
+        # goodstype_obj.save()
+        ser_data = GoodsTypeSerializer(data=data)
+        print(ser_data)
+        if ser_data.is_valid():
+            print('符合要求')
+            ser_data.save()
+            return redirect('/seller/goodstype')
+        else:
+            return Response({"status":'error'})
 
 
 def vue(request):

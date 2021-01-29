@@ -4,7 +4,8 @@
 
     <script src="/static/seller/js/vue.min.js"></script>
     <script src="/static/seller/js/vue-resource.js"></script>
-    <div class="container-fluid" id="app">
+    <div id="app">
+    <div class="container-fluid" >
         <!--添加商品按钮-->
         <div class="row">
             <button class="btn btn-primary col-lg-2 ml-auto" data-toggle="modal" data-target="#goods_modal">
@@ -79,7 +80,7 @@
             <div class="modal-content">
                 <div class="modal-header">添加商品类型</div>
                 <div class="modal-body">
-                    <form class="form" action="/seller/add_goodstype/" method="post" enctype="multipart/form-data">
+                    <form class="form" action="/seller/goodstype_list/" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group">
                             <label class="">商品类型名称</label>
@@ -95,7 +96,9 @@
             </div>
         </div>
     </div>
+    </div>
     <script>
+        var url='http://127.0.0.1:8000/seller/goodstype_list/'
         var vm = new Vue({
             el:'#app',
             data:{
@@ -103,7 +106,7 @@
                 goodstype_obj_list:[],
             },
             created:function () {
-                var url='http://127.0.0.1:8000/seller/goodstype_list/'
+
                 this.$http.get(url).then(
                     function (result) {
                         this.goodstype_obj_list=result['data']
@@ -113,7 +116,8 @@
                         alert('error')
                     }
                 )
-            }
+            },
+
         })
     </script>
 {% endblock %}
